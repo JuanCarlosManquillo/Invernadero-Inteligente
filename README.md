@@ -1,73 +1,78 @@
-# React + TypeScript + Vite
+# Invernadero Inteligente
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Descripción breve
+- Frontend construido con React + Vite + TypeScript. Muestra datos de sensores, gráficas y controles para actuadores del invernadero. La app se monta en src/main.tsx y usa rutas en src/pages.
 
-Currently, two official plugins are available:
+Cómo funciona (resumen técnico)
+- Vite sirve y empaqueta la aplicación.
+- React organiza la UI en componentes dentro de `src/`.
+- React Query (@tanstack/react-query) gestiona la obtención/caché de datos.
+- Rutas con react-router-dom (src/pages/Index.tsx, NotFound.tsx).
+- Configuración de dev: `vite.config.ts` (servidor en el puerto 8080 por defecto).
+- Variables expuestas al cliente deben empezar con `VITE_` y se acceden vía `import.meta.env`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Requisitos
+- Node.js 18 o superior
+- npm (incluido con Node.js)
+- Git (para clonar)
 
-## React Compiler
+Comandos básicos (Windows — PowerShell / CMD)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1) Clonar el repositorio
+PowerShell o CMD:
+```bash
+git clone https://github.com/JuanCarlosManquillo/Invernadero-Inteligente.git
+cd "Invernadero-Inteligente"
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2) Comprobar versiones (opcional)
+PowerShell / CMD:
+```bash
+node -v
+npm -v
 ```
+
+3) Instalar dependencias
+PowerShell / CMD:
+```bash
+npm i
+# o para instalación reproducible en CI:
+# npm ci
+```
+
+4) Ejecutar en modo desarrollo (hot-reload)
+PowerShell / CMD:
+```bash
+npm run dev
+```
+- Por defecto el servidor escucha en el puerto 8080 (ver `vite.config.ts`). Abrir: http://localhost:8080
+
+5) Generar build de producción (solo si lo necesitas)
+PowerShell / CMD:
+```bash
+npm run build
+```
+
+Instalar librerías nuevas
+- Dependencia de producción:
+```bash
+npm i nombre-paquete
+```
+- Dependencia de desarrollo:
+```bash
+npm i -D nombre-paquete
+```
+
+Archivos y carpetas clave
+- src/ — código fuente (componentes, pages, hooks)
+- index.html — punto de entrada HTML
+- public/ — assets estáticos
+- vite.config.ts — configuración de Vite (alias `@` apuntando a `./src`, servidor en puerto 8080)
+- package.json — scripts: `dev`, `build`, `preview`
+- .gitignore — ya excluye `node_modules`, `dist`, `.env`, etc.
+
+Scripts disponibles (ejecutar en la raíz del proyecto)
+- npm i — instalar dependencias
+- npm run dev — iniciar servidor de desarrollo
+- npm run build — compilar para producción
+- npm run preview — servir localmente el `dist` (si está configurado)
