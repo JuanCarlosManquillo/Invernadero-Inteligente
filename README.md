@@ -2,12 +2,47 @@
 
 Descripción breve
 - Frontend construido con React + Vite + TypeScript. Muestra datos de sensores, gráficas y controles para actuadores del invernadero. La app se monta en src/main.tsx y usa rutas en src/pages.
+- **NUEVA**: Integración con ESP32 en PlatformIO para captura y control en tiempo real
+
+## 🆕 Integración ESP32 (Nuevo)
+
+Se agregó soporte completo para conectar un ESP32 (con sensores y actuadores) a este dashboard React.
+
+### Características
+- ✅ Conexión en tiempo real con ESP32
+- ✅ Lectura de sensores (Temperatura, Humedad, Luminosidad)
+- ✅ Control de actuadores (Bombillo, Ventilador, Alarma)
+- ✅ Gráficas históricas con Recharts
+- ✅ Validación de datos JSON
+- ✅ Manejo robusto de errores
+
+### Para Empezar
+1. Copia `.env.example` a `.env.local` y configura la IP del ESP32:
+   ```
+   VITE_ESP32_URL=http://192.168.1.100
+   ```
+
+2. Instala recharts (si no lo tienes):
+   ```bash
+   npm install recharts
+   ```
+
+3. ¡Listo! El dashboard se conectará automáticamente
+
+### Documentación Completa
+- **[INICIO.md](INICIO.md)** - Punto de entrada
+- **[QUICK_START.md](QUICK_START.md)** - Guía de 5 pasos
+- **[INTEGRACION_ESP32.md](INTEGRACION_ESP32.md)** - Guía detallada
+- **[ESP32_CODE_REFERENCE.md](ESP32_CODE_REFERENCE.md)** - Código para PlatformIO
+- **[INDICE.md](INDICE.md)** - Índice de toda la documentación
 
 Cómo funciona (resumen técnico)
 - Vite sirve y empaqueta la aplicación.
 - React organiza la UI en componentes dentro de `src/`.
 - React Query (@tanstack/react-query) gestiona la obtención/caché de datos.
 - Rutas con react-router-dom (src/pages/Index.tsx, NotFound.tsx).
+- **NUEVO**: Hook useEsp32 obtiene datos del ESP32 vía HTTP REST cada 5 segundos
+- **NUEVO**: Componentes DataChart y Dashboard para visualización
 - Configuración de dev: `vite.config.ts` (servidor en el puerto 8080 por defecto).
 - Variables expuestas al cliente deben empezar con `VITE_` y se acceden vía `import.meta.env`.
 
@@ -15,6 +50,7 @@ Requisitos
 - Node.js 18 o superior
 - npm (incluido con Node.js)
 - Git (para clonar)
+- **NUEVO**: ESP32 con WiFi (opcional, para integración)
 
 Comandos básicos (Windows — PowerShell / CMD)
 
